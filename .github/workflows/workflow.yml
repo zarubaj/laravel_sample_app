@@ -8,6 +8,7 @@ env:
   REGISTRY: ghcr.io/${{ github.repository_owner }}
   IMAGE_NAME: laravel_sample_app
   PHP_VERSION: "8.4"
+  APP_KEY: ${{ secrets.APP_KEY_TESTING }}
 
 jobs:
   build-and-test:
@@ -24,10 +25,6 @@ jobs:
           php-version: ${{ env.PHP_VERSION }}
           extensions: mbstring, pdo_sqlite, zip, intl
           coverage: none
-
-      - name: Copy .env file
-        run: |
-          cp .env.testing .env
 
       - name: Install Composer dependencies
         run: composer install -q --prefer-dist --no-ansi --no-interaction --no-scripts --no-progress
